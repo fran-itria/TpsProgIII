@@ -1,2 +1,15 @@
-# TpsProgIII
-Trabajos practicos de la materia Programación 3 de la carrera Tecnicatura en Desarrollo Web dictada en la Universidad Nacional de Entre Ríos en la Facultad de Ciencias de la Administración
+📚 Trabajos Prácticos – Programación 3
+
+📌 Descripción:
+    Estos proyectos corresponden a la materia Programación 3 y tiene como objetivo aplicar los conceptos aprendidos en clase.
+
+👥 Integrantes:
+    ✨ Valeria Narela Cañete
+
+    ✨ Joel Chasmann
+
+    ✨ Franco Itria
+
+    ✨ Gerardo Lujan
+
+    ✨ Mirko Vidal
