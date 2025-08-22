@@ -2,7 +2,7 @@ const fs = require('fs');
 const urlApi = 'https://fakestoreapi.com/products';
 const ARCHIVO_LOCAL = './FileSystem/productos.json';
 
-async function safeJsonFetch(res) {
+async function guardarJsonFetch(res) {
   const text = await res.text();
   try {
     return text ? JSON.parse(text) : null;
@@ -37,14 +37,14 @@ function mostrarProductosLista(productos, titulo = 'Productos') {
 
 async function obtenerTodosProductos() {
   const res = await fetch(urlApi);
-  const data = await safeJsonFetch(res);
+  const data = await guardarJsonFetch(res);
   mostrarProductosLista(data, 'Todos los productos (GET)');
   return data;
 }
 
 async function obtenerProductosLimitados(limit = 5) {
   const res = await fetch(`${urlApi}?limit=${limit}`);
-  const data = await safeJsonFetch(res);
+  const data = await guardarJsonFetch(res);
   mostrarProductosLista(data, `Primeros ${limit} productos (GET limitado)`);
   return data;
 }
@@ -67,21 +67,21 @@ async function agregarProductoAPI() {
     }),
     headers: { 'Content-Type': 'application/json' }
   });
-  const data = await safeJsonFetch(res);
+  const data = await guardarJsonFetch(res);
   mostrarProductosLista([data], 'Producto agregado (POST)');
   return data;
 }
 
 async function buscarProductoPorID(id) {
   const res = await fetch(`${urlApi}/${id}`);
-  const data = await safeJsonFetch(res);
+  const data = await guardarJsonFetch(res);
   mostrarProductosLista([data], `Producto con ID ${id} (GET por ID)`);
   return data;
 }
 
 async function eliminarProducto(id) {
   const res = await fetch(`${urlApi}/${id}`, { method: 'DELETE' });
-  const data = await safeJsonFetch(res);
+  const data = await guardarJsonFetch(res);
   mostrarProductosLista([data], `Producto eliminado con ID ${id} (DELETE)`);
   return data;
 }
@@ -92,7 +92,7 @@ async function modificarProducto(id) {
     body: JSON.stringify({ title: 'Producto Modificado', price: 99.99 }),
     headers: { 'Content-Type': 'application/json' }
   });
-  const data = await safeJsonFetch(res);
+  const data = await guardarJsonFetch(res);
   mostrarProductosLista([data], `Producto modificado con ID ${id} (UPDATE)`);
   return data;
 }
