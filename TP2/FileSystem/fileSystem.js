@@ -1,5 +1,6 @@
 const fs = require('fs');
-const ARCHIVO_LOCAL = './FileSystem/productos.json';
+const path = require('path');
+const ARCHIVO_LOCAL = path.join(__dirname, 'productos.json');
 
 function leerProductos() {
   if (!fs.existsSync(ARCHIVO_LOCAL)) {
@@ -12,6 +13,8 @@ function leerProductos() {
 }
 
 function guardarProductos(productos) {
+  const dir = path.dirname(ARCHIVO_LOCAL);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(ARCHIVO_LOCAL, JSON.stringify(productos, null, 2));
   console.log(`\nDatos guardados en ${ARCHIVO_LOCAL}`);
 }

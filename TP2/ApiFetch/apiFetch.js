@@ -1,6 +1,7 @@
 const fs = require('fs');
+const path = require('path');
 const urlApi = 'https://fakestoreapi.com/products';
-const ARCHIVO_LOCAL = './FileSystem/productos.json';
+const ARCHIVO_LOCAL = path.join(__dirname, '..', 'FileSystem', 'productos.json');
 
 async function safeJsonFetch(res) {
   const text = await res.text();
@@ -50,7 +51,8 @@ async function obtenerProductosLimitados(limit = 5) {
 }
 
 function guardarProductosEnJSON(productos) {
-  if (!fs.existsSync('../FileSystem')) fs.mkdirSync('../FileSystem');
+  const dir = path.dirname(ARCHIVO_LOCAL);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(ARCHIVO_LOCAL, JSON.stringify(productos, null, 2));
   console.log(`\n--- Productos guardados en ${ARCHIVO_LOCAL} ---`);
 }
@@ -103,7 +105,6 @@ async function main() {
   const productosLimitados = await obtenerProductosLimitados(5);
 
   guardarProductosEnJSON(productosLimitados);
-
 
   await agregarProductoAPI();
 
