@@ -38,16 +38,16 @@ function mostrarProductosLista(productos, titulo = 'Productos') {
 
 async function obtenerTodosProductos() {
   const res = await fetch(urlApi);
-  const data = await guardarJsonFetch(res);
-  mostrarProductosLista(data, 'Todos los productos (GET)');
-  return data;
+  const datos = await guardarJsonFetch(res);
+  mostrarProductosLista(datos, 'Todos los productos (GET)');
+  return datos;
 }
 
 async function obtenerProductosLimitados(limit = 5) {
   const res = await fetch(`${urlApi}?limit=${limit}`);
-  const data = await guardarJsonFetch(res);
-  mostrarProductosLista(data, `Primeros ${limit} productos (GET limitado)`);
-  return data;
+  const datos = await guardarJsonFetch(res);
+  mostrarProductosLista(datos, `Primeros ${limit} productos (GET limitado)`);
+  return datos;
 }
 
 function guardarProductosEnJSON(productos) {
@@ -69,23 +69,23 @@ async function agregarProductoAPI() {
     }),
     headers: { 'Content-Type': 'application/json' }
   });
-  const data = await guardarJsonFetch(res);
-  mostrarProductosLista([data], 'Producto agregado (POST)');
-  return data;
+  const datos = await guardarJsonFetch(res);
+  mostrarProductosLista([datos], 'Producto agregado (POST)');
+  return datos;
 }
 
 async function buscarProductoPorID(id) {
   const res = await fetch(`${urlApi}/${id}`);
-  const data = await guardarJsonFetch(res);
-  mostrarProductosLista([data], `Producto con ID ${id} (GET por ID)`);
-  return data;
+  const datos = await guardarJsonFetch(res);
+  mostrarProductosLista([datos], `Producto con ID ${id} (GET por ID)`);
+  return datos;
 }
 
 async function eliminarProducto(id) {
   const res = await fetch(`${urlApi}/${id}`, { method: 'DELETE' });
-  const data = await guardarJsonFetch(res);
-  mostrarProductosLista([data], `Producto eliminado con ID ${id} (DELETE)`);
-  return data;
+  const datos = await guardarJsonFetch(res);
+  mostrarProductosLista([datos], `Producto eliminado con ID ${id} (DELETE)`);
+  return datos;
 }
 
 async function modificarProducto(id) {
@@ -94,9 +94,9 @@ async function modificarProducto(id) {
     body: JSON.stringify({ title: 'Producto Modificado', price: 99.99 }),
     headers: { 'Content-Type': 'application/json' }
   });
-  const data = await guardarJsonFetch(res);
-  mostrarProductosLista([data], `Producto modificado con ID ${id} (UPDATE)`);
-  return data;
+  const datos = await guardarJsonFetch(res);
+  mostrarProductosLista([datos], `Producto modificado con ID ${id} (UPDATE)`);
+  return datos;
 }
 
 async function main() {
